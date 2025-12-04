@@ -320,7 +320,7 @@ body {
   transform: rotate(3deg);
   transition: 0.3s linear;
   box-shadow: 20px 10px 30px 20px #f3e8ff;
-  background-image: url("./src/assets/imagens-produtos/instagram-1.png");
+  background-image: url("./src/assets/imagens-produtos/instagram-4.png");
   background-size: cover;
   background-position: center;
 }
@@ -942,14 +942,14 @@ body {
   gap: 12px;
 }
 
-.sub-t a p {
+.sub-t a {
   color: var(--color-text-muted);
   font-weight: 600;
   transition: 0.2s ease;
   font-size: 0.95rem;
 }
 
-.sub-t a p:hover {
+.sub-t a:hover {
   color: var(--color-primary);
   transform: translateX(5px);
 }

@@ -11,6 +11,19 @@ import {
   X,
 } from "lucide-react";
 
+// ⭐ IMPORTAÇÃO DAS IMAGENS
+import {
+  logo,
+  coracao,
+  instagram4,
+  vestido,
+  casa,
+  prato,
+  ursinho,
+  bolsa,
+  estrela,
+} from "./assets/images";
+
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("Destaques");
@@ -19,25 +32,17 @@ function App() {
   useEffect(() => {
     const handleScroll = () => {
       const header = document.querySelector(".header");
-
-      if (window.scrollY > 10) {
-        header.classList.add("scrolled");
-      } else {
-        header.classList.remove("scrolled");
-      }
+      if (window.scrollY > 10) header.classList.add("scrolled");
+      else header.classList.remove("scrolled");
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
+  const closeMenu = () => setIsMenuOpen(false);
 
   const handleCategorySelect = (categoryName) => {
     setSelectedCategory(categoryName);
@@ -45,10 +50,9 @@ function App() {
     closeMenu();
 
     setTimeout(() => {
-      const section = document.getElementById("selected-products-section");
-      if (section) {
-        section.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
+      document
+        .getElementById("selected-products-section")
+        ?.scrollIntoView({ behavior: "smooth" });
     }, 100);
   };
 
@@ -57,40 +61,35 @@ function App() {
     setIsProductsViewOpen(false);
 
     setTimeout(() => {
-      const categoriesSection = document.getElementById("categorias-section");
-      if (categoriesSection) {
-        categoriesSection.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
+      document
+        .getElementById("categorias-section")
+        ?.scrollIntoView({ behavior: "smooth" });
     }, 100);
   };
 
   const getWhatsAppLink = (productName) => {
     const phoneNumber = "5511946618067";
     const message = encodeURIComponent(
-      `Olá, gostaria de saber mais sobre o produto: ${productName}. Poderia me dar mais detalhes?`
+      `Olá, gostaria de saber mais sobre o produto: ${productName}.`
     );
     return `https://wa.me/${phoneNumber}?text=${message}`;
   };
 
-  // ⭐️ NOVO: Função para o clique genérico do WhatsApp
   const handleWhatsAppClick = (
-    contextMessage = "Olá, gostaria de fazer um pedido ou saber mais sobre os produtos."
+    contextMessage = "Olá, gostaria de fazer um pedido!"
   ) => {
-    const phoneNumber = "5511946618067"; // Seu número de telefone
+    const phoneNumber = "5511946618067";
     const message = encodeURIComponent(contextMessage);
-    const link = `https://wa.me/${phoneNumber}?text=${message}`;
-    window.open(link, "_blank"); // Abre em uma nova aba
+    window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
   };
 
+  // ⭐ AGORA TODAS AS IMAGENS VEM VIA IMPORT
   const allProducts = [
     {
       id: 1,
       name: "Cropped Boho Chic",
       price: "R$ 129,90",
-      image: "./src/assets/imagens-produtos/instagram-4.png",
+      image: instagram4,
       tag: "Mais Vendido",
       category: "Roupas",
     },
@@ -98,7 +97,7 @@ function App() {
       id: 2,
       name: "Bolsa de Praia Natural",
       price: "R$ 189,90",
-      image: "./src/assets/imagens-produtos/instagram-4.png",
+      image: instagram4,
       tag: "Lançamento",
       category: "Acessórios",
     },
@@ -106,7 +105,7 @@ function App() {
       id: 3,
       name: "Kit Mesa Posta (4 un)",
       price: "R$ 149,90",
-      image: "./src/assets/imagens-produtos/instagram-4.png",
+      image: instagram4,
       tag: "Personalizável",
       category: "Mesa Posta",
     },
@@ -114,7 +113,7 @@ function App() {
       id: 4,
       name: "Amigurumi Ursinho",
       price: "Sob Consulta",
-      image: "./src/assets/imagens-produtos/instagram-4.png",
+      image: instagram4,
       tag: "Infantil",
       category: "Amigurumis",
     },
@@ -122,7 +121,7 @@ function App() {
       id: 5,
       name: "Tapete Redondo Sala",
       price: "R$ 299,90",
-      image: "./src/assets/imagens-produtos/instagram-4.png",
+      image: instagram4,
       tag: "Decoração",
       category: "Decoração",
     },
@@ -130,7 +129,7 @@ function App() {
       id: 6,
       name: "Cesto Organizador",
       price: "R$ 89,90",
-      image: "./src/assets/imagens-produtos/instagram-4.png",
+      image: instagram4,
       tag: "Decoração",
       category: "Decoração",
     },
@@ -138,7 +137,7 @@ function App() {
       id: 7,
       name: "Saída de Praia Longa",
       price: "R$ 219,90",
-      image: "./src/assets/imagens-produtos/instagram-4.png",
+      image: instagram4,
       tag: "Verão",
       category: "Roupas",
     },
@@ -146,7 +145,7 @@ function App() {
       id: 8,
       name: "Polvo Amigurumi",
       price: "R$ 120,00",
-      image: "./src/assets/imagens-produtos/instagram-4.png",
+      image: instagram4,
       tag: "Infantil",
       category: "Amigurumis",
     },
@@ -155,34 +154,14 @@ function App() {
   const featuredProducts = allProducts.slice(0, 4);
 
   const categories = [
-    {
-      name: "Roupas",
-      icon: "./src/assets/icons/vestido.png",
-      desc: "Tops, saias e vestidos leves",
-    },
-    {
-      name: "Decoração",
-      icon: "./src/assets/icons/casa.png",
-      desc: "Cestos, tapetes e mantas",
-    },
-    {
-      name: "Mesa Posta",
-      icon: "./src/assets/icons/prato.png",
-      desc: "Sousplat e caminhos de mesa",
-    },
-    {
-      name: "Amigurumis",
-      icon: "./src/assets/icons/urso.png",
-      desc: "Bichinhos feitos com amor",
-    },
-    {
-      name: "Acessórios",
-      icon: "./src/assets/icons/bolsa.png",
-      desc: "Bolsas e chapéus exclusivos",
-    },
+    { name: "Roupas", icon: vestido, desc: "Tops, saias e vestidos leves" },
+    { name: "Decoração", icon: casa, desc: "Cestos, tapetes e mantas" },
+    { name: "Mesa Posta", icon: prato, desc: "Sousplat e caminhos de mesa" },
+    { name: "Amigurumis", icon: ursinho, desc: "Bichinhos feitos com amor" },
+    { name: "Acessórios", icon: bolsa, desc: "Bolsas e chapéus exclusivos" },
     {
       name: "Encomendas",
-      icon: "./src/assets/icons/estrela.png",
+      icon: estrela,
       desc: "Sua ideia transformada em arte",
     },
   ];
@@ -200,40 +179,35 @@ function App() {
     <div className="container">
       <header className="header">
         <div className="logo">
-          <img src="./src/assets/Logo.png" alt="Logo Arte e Amor Artesanatos" />
+          <img src={logo} alt="Logo Arte e Amor Artesanatos" />
         </div>
+
         <nav className="menu desktop-menu">
-          <a href="#catalogo">
-            <p>Catálogo</p>
-          </a>
-          <a href="#encomendas">
-            <p>Encomendas</p>
-          </a>
-          <a href="#">
-            <p>Sobre</p>
-          </a>
-          <a href="#contato">
-            <p>Contato</p>
-          </a>
+          <a href="#catalogo">Catálogo</a>
+          <a href="#encomendas">Encomendas</a>
+          <a href="#">Sobre</a>
+          <a href="#contato">Contato</a>
         </nav>
+
         <div className="contato-header">
           <Instagram className="icon-instagram" size={20} />
-          {/* ⭐️ WHATSAPP: Botão do Header */}
+
           <div
             className="contato-button"
             onClick={() =>
               handleWhatsAppClick("Olá, gostaria de fazer um pedido!")
             }
-            style={{ cursor: "pointer" }}
           >
             <MessageCircle className="icon-contato" size={15} />
             <p className="p-contato-button">Fazer Pedido</p>
           </div>
+
           <button className="mobile-menu-btn" onClick={toggleMenu}>
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </header>
+
       <nav className={`mobile-menu ${isMenuOpen ? "open" : ""}`}>
         <div className="mobile-menu-link">
           <a href="#catalogo" onClick={closeMenu}>
@@ -249,23 +223,24 @@ function App() {
             Contato
           </a>
         </div>
-        {/* ⭐️ WHATSAPP: Botão do Menu Mobile */}
+
         <button
           className="btn-menu-hamb"
           onClick={() =>
             handleWhatsAppClick(
-              "Olá, vi o site e gostaria de conversar sobre os produtos!"
+              "Olá, gostaria de saber mais sobre seus produtos!"
             )
           }
         >
           <MessageCircle /> Pedir no Whatsapp
         </button>
       </nav>
+
       <div id="catalogo" className="main">
         <div className="top">
           <div className="destaque">
             <div className="msg">
-              <img src="./src/assets/coracao.png" alt="Coração" />
+              <img src={coracao} alt="Coração" />
               <p className="p-msg">
                 100% ARTESANAL
                 <span className="ponto">
@@ -274,14 +249,16 @@ function App() {
                 FEITO COM AMOR
               </p>
             </div>
+
             <h1>
               Crochê feito à mão com <span>carinho</span> e alma.
             </h1>
+
             <p>
-              Peças exclusivas, acabamento impecável e encomendas
-              <br />
-              sob medida para vestir você e sua casa com aconchego.
+              Peças exclusivas, acabamento impecável e encomendas sob medida
+              para vestir você e sua casa.
             </p>
+
             <div className="buttons-destaque">
               <button
                 className="btn-cat"
@@ -289,7 +266,7 @@ function App() {
               >
                 Ver Catálogo
               </button>
-              {/* ⭐️ WHATSAPP: Botão Encomendar Destaque */}
+
               <button
                 className="btn-enc"
                 onClick={() =>
@@ -298,26 +275,27 @@ function App() {
                   )
                 }
               >
-                <span>
-                  <MessageCircle size={17} />
-                </span>
-                Encomendar
+                <MessageCircle size={17} /> Encomendar
               </button>
             </div>
           </div>
+
           <div className="photo-destaque">
             <div className="card-img"></div>
           </div>
         </div>
+
         {!isProductsViewOpen && (
           <div className="middle">
             <p>NOSSOS FAVORITOS</p>
             <h3 className="title-middle">Destaques da Semana</h3>
+
             <div className="wrapper">
               {featuredProducts.map((product) => (
                 <div key={product.id} className="one">
                   <div className="card-1">
                     <div className="status">{product.tag}</div>
+
                     <div className="img-card">
                       <img
                         className="img-wrapper"
@@ -325,9 +303,10 @@ function App() {
                         alt={product.name}
                       />
                     </div>
+
                     <div className="footer-card">
                       <h3 className="title-card">{product.name}</h3>
-                      {/* ESTE JÁ TINHA: Link específico do produto */}
+
                       <a
                         href={getWhatsAppLink(product.name)}
                         target="_blank"
@@ -344,6 +323,7 @@ function App() {
                 </div>
               ))}
             </div>
+
             <a
               href="#"
               className="ver-catalogo-link"
@@ -352,19 +332,19 @@ function App() {
               Ver catálogo completo
               <ArrowRight className="seta-cat" />
             </a>
+
             <div className="bar"></div>
           </div>
         )}
+
         {!isProductsViewOpen && (
           <div id="categorias-section" className="categorias">
             <div className="header-categorias">
               <div className="titulo-cat-wrapper">
                 <h3 className="title-cat">Navegue por Categorias</h3>
-                <p>
-                  Selecione uma categoria abaixo para ver os modelos
-                  disponíveis.
-                </p>
+                <p>Selecione uma categoria abaixo para ver os modelos.</p>
               </div>
+
               <a
                 href="#"
                 className="ver-tudo-btn"
@@ -374,13 +354,13 @@ function App() {
                 <ChevronRight className="arrow-cat" />
               </a>
             </div>
+
             <div className="wrapper-cat">
               {categories.map((cat, index) => (
                 <div
                   key={index}
                   className={`card-cat card-${index + 1}`}
                   onClick={() => handleCategorySelect(cat.name)}
-                  style={{ cursor: "pointer" }}
                 >
                   <div className="card-1-cat">
                     <div className="img-card-cat">
@@ -390,6 +370,7 @@ function App() {
                         alt={`Ícone de ${cat.name}`}
                       />
                     </div>
+
                     <h3 className="title-card-cat">{cat.name}</h3>
                     <h3 className="desc-cat">{cat.desc}</h3>
                   </div>
@@ -398,6 +379,7 @@ function App() {
             </div>
           </div>
         )}
+
         {isProductsViewOpen && (
           <div
             id="selected-products-section"
@@ -410,16 +392,18 @@ function App() {
                   {selectedCategory === "Todos" ? "Completo" : selectedCategory}
                 </span>
               </h2>
+
               <button className="close-view-btn" onClick={closeProductsView}>
-                <X size={16} style={{ marginRight: "5px" }} /> Fechar
-                visualização
+                <X size={16} /> Fechar visualização
               </button>
             </div>
+
             <div className="products-grid">
               {productsToDisplay.length > 0 ? (
                 productsToDisplay.map((product) => (
                   <div key={product.id} className="product-card">
                     <div className="status">{product.tag}</div>
+
                     <div className="img-card">
                       <img
                         className="img-wrapper"
@@ -427,14 +411,14 @@ function App() {
                         alt={product.name}
                       />
                     </div>
+
                     <div className="footer-card">
                       <h3 className="title-card">{product.name}</h3>
-                      {/* ESTE JÁ TINHA: Link específico do produto */}
+
                       <a
                         href={getWhatsAppLink(product.name)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="whatsapp-link-product"
                       >
                         <h3 className="preco">
                           {product.price}
@@ -446,96 +430,72 @@ function App() {
                 ))
               ) : (
                 <p className="no-products-message">
-                  Nenhum produto encontrado na categoria
-                  <span style={{ fontWeight: "bold" }}>{selectedCategory}</span>
-                  . Experimente outra categoria.
+                  Nenhum produto encontrado em{" "}
+                  <strong>{selectedCategory}</strong>.
                 </p>
               )}
             </div>
           </div>
         )}
+
+        {/* Tutorial */}
         <div id="encomendas" className="tutorial">
           <div className="info">
             <h3 className="title-tut">Como encomendar sua peça</h3>
             <h3 className="descricao-tut">
-              Um processo simples e transparente, feito para você.
+              Um processo simples e transparente.
             </h3>
+
             <div className="steps">
-              <div className="escolha">
-                <div className="card-escolha">
-                  <img
-                    src="./src/assets/icons/bolsa.png"
-                    alt="Ícone de escolha"
-                  />
-                  <div>1</div>
+              {[1, 2, 3, 4].map((step) => (
+                <div key={step} className="escolha">
+                  <div className="card-escolha">
+                    <img src={bolsa} alt="Ícone" />
+                    <div>{step}</div>
+                  </div>
+
+                  <h3 className="title-escolha">
+                    {step === 1
+                      ? "1. Escolha"
+                      : step === 2
+                      ? "2. Personalize"
+                      : step === 3
+                      ? "3. Produção"
+                      : "4. Entrega"}
+                  </h3>
+
+                  <h3 className="desc-escolha">
+                    {step === 1
+                      ? "Selecione o modelo ou traga sua inspiração."
+                      : step === 2
+                      ? "Defina cores, tamanhos e detalhes."
+                      : step === 3
+                      ? "Confeccionamos à mão com fios premium."
+                      : "Receba em casa com cuidado especial."}
+                  </h3>
                 </div>
-                <h3 className="title-escolha">1. Escolha</h3>
-                <h3 className="desc-escolha">
-                  Selecione o modelo ou traga sua inspiração.
-                </h3>
-              </div>
-              <div className="escolha">
-                <div className="card-escolha">
-                  <img
-                    src="./src/assets/icons/bolsa.png"
-                    alt="Ícone de personalização"
-                  />
-                  <div>2</div>
-                </div>
-                <h3 className="title-escolha">2. Personalize</h3>
-                <h3 className="desc-escolha">
-                  Defina cores, tamanhos e detalhes conosco.
-                </h3>
-              </div>
-              <div className="escolha">
-                <div className="card-escolha">
-                  <img
-                    src="./src/assets/icons/bolsa.png"
-                    alt="Ícone de produção"
-                  />
-                  <div>3</div>
-                </div>
-                <h3 className="title-escolha">3. Produção</h3>
-                <h3 className="desc-escolha">
-                  Confeccionamos à mão com fios premium
-                </h3>
-              </div>
-              <div className="escolha">
-                <div className="card-escolha">
-                  <img
-                    src="./src/assets/icons/bolsa.png"
-                    alt="Ícone de entrega"
-                  />
-                  <div>4</div>
-                </div>
-                <h3 className="title-escolha">4. Entrega</h3>
-                <h3 className="desc-escolha">
-                  Receba em casa com embalagem perfumada.
-                </h3>
-              </div>
+              ))}
             </div>
-            {/* ⭐️ WHATSAPP: Botão Solicitar Orçamento */}
+
             <button
               className="btn-escolha"
               onClick={() =>
-                handleWhatsAppClick(
-                  "Olá, gostaria de solicitar um orçamento para uma peça personalizada!"
-                )
+                handleWhatsAppClick("Olá, gostaria de solicitar um orçamento!")
               }
             >
-              <MessageCircle className="escolha-icon" size={17} />
-              Solicitar Orçamento
+              <MessageCircle size={17} /> Solicitar Orçamento
             </button>
           </div>
         </div>
+
+        {/* Contato */}
         <div id="contato" className="contato">
           <div className="contato-content">
             <h3 className="title-contato">Transforme fios em sonhos</h3>
             <h3 className="desc-cont">
-              Cada peça é feita à mão, com cuidado e acabamento profissional.
-              Personalize cores, tamanhos e modelos do seu jeito.
+              Peças feitas à mão com cuidado e acabamento profissional.
             </h3>
-            {/* ⭐️ WHATSAPP: Botão Fazer Pedido Agora Contato */}
+
             <button
               className="btn-contato"
               onClick={() =>
@@ -547,22 +507,25 @@ function App() {
           </div>
         </div>
       </div>
+
+      {/* Footer */}
       <footer className="footer">
         <div className="footer-wrapper">
           <div className="topicos">
             <div className="one-topico">
-              <img src="./src/assets/Logo.png" alt="Logo Arte e Amor" />
+              <img src={logo} alt="Logo" />
               <h3>Arte e Amor Artesanatos</h3>
             </div>
+
             <p className="desc-topicos">
-              Artesanato com alma. Peças exclusivas feitas à mão para trazer
-              mais cor e afeto para o seu dia a dia.
+              Artesanato com alma. Peças feitas à mão.
             </p>
+
             <div className="redes-footer">
               <div className="insta">
                 <Instagram size={16} />
               </div>
-              {/* ⭐️ WHATSAPP: Botão de ícone no Footer (Recomendado usar a tag <a> com o link direto aqui, mas vou usar a div para manter a estrutura) */}
+
               <div
                 className="message"
                 onClick={() =>
@@ -570,69 +533,57 @@ function App() {
                     "Olá, entrei em contato pelo link do footer."
                   )
                 }
-                style={{ cursor: "pointer" }}
               >
                 <MessageCircle size={16} />
               </div>
             </div>
           </div>
+
           <div className="topicos">
             <div className="sub-topico">
               <h3>Navegação</h3>
             </div>
+
             <div className="sub-t">
-              <a href="#">
-                <p>Início</p>
-              </a>
-              <a href="#catalogo">
-                <p>Catálogo</p>
-              </a>
-              <a href="#">
-                <p>Sobre a Artesã</p>
-              </a>
-              <a href="#">
-                <p>Politica de Envio</p>
-              </a>
+              <a href="#">Início</a>
+              <a href="#catalogo">Catálogo</a>
+              <a href="#">Sobre a Artesã</a>
+              <a href="#">Política de Envio</a>
             </div>
           </div>
+
           <div className="topicos">
             <div className="sub-topico">
               <h3>Coleções</h3>
             </div>
+
             <div className="sub-t">
-              <a href="#">
-                <p>Moda Crochet</p>
-              </a>
-              <a href="#">
-                <p>Decoração</p>
-              </a>
-              <a href="#">
-                <p>Infantil</p>
-              </a>
-              <a href="#">
-                <p>Promoções</p>
-              </a>
+              <a href="#">Moda Crochet</a>
+              <a href="#">Decoração</a>
+              <a href="#">Infantil</a>
+              <a href="#">Promoções</a>
             </div>
           </div>
+
           <div className="topicos">
             <div className="sub-topico">
               <h3>Contato</h3>
             </div>
+
             <div className="sub-contato-wrapper">
               <div className="sub-contato">
                 <div>
-                  {/* ⭐️ WHATSAPP: Link no número de telefone para celular */}
                   <MessageCircle className="icon-sub-contato" />
                   <a
-                    href="https://wa.me/5511946618067?text=Olá, gostaria de falar com a Arte e Amor Artesanatos!"
+                    href="https://wa.me/5511946618067?text=Olá!"
                     target="_blank"
-                    rel="noopener noreferrer"
                   >
                     <h3>(11) 99999-9999</h3>
                   </a>
                 </div>
                 <p>Seg a Sex, 9h às 18h</p>
               </div>
+
               <div className="sub-envio">
                 <div>
                   <Truck className="icon-sub-contato" />
@@ -643,7 +594,9 @@ function App() {
             </div>
           </div>
         </div>
+
         <div className="bar-contato"></div>
+
         <div className="direitos">
           © 2024 Arte & Amor Artesanatos. Todos os direitos reservados.
         </div>
