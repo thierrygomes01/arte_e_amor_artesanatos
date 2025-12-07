@@ -68,7 +68,7 @@ function App() {
   };
 
   const getWhatsAppLink = (productName) => {
-    const phoneNumber = "5511946618067";
+    const phoneNumber = "5511983199876";
     const message = encodeURIComponent(
       `Olá, gostaria de saber mais sobre o produto: ${productName}.`
     );
@@ -78,7 +78,7 @@ function App() {
   const handleWhatsAppClick = (
     contextMessage = "Olá, gostaria de fazer um pedido!"
   ) => {
-    const phoneNumber = "5511946618067";
+    const phoneNumber = "5511983199876";
     const message = encodeURIComponent(contextMessage);
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
   };
@@ -281,7 +281,10 @@ function App() {
           </div>
 
           <div className="photo-destaque">
-            <div className="card-img"></div>
+            <div
+              className="card-img"
+              style={{ backgroundImage: `url(${instagram4})` }}
+            ></div>
           </div>
         </div>
 
@@ -575,7 +578,7 @@ function App() {
                 <div>
                   <MessageCircle className="icon-sub-contato" />
                   <a
-                    href="https://wa.me/5511946618067?text=Olá!"
+                    href="https://wa.me/5511983199876?text=Olá!"
                     target="_blank"
                   >
                     <h3>(11) 99999-9999</h3>
