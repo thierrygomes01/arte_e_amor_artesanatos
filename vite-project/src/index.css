@@ -90,6 +90,11 @@ body {
   gap: 1.2rem;
 }
 
+.btn-instagram {
+  display: flex;
+  justify-content: center;
+}
+
 .icon-instagram {
   color: var(--color-text-muted);
   cursor: pointer;
@@ -185,7 +190,7 @@ body {
 .main {
   width: 85%;
   max-width: 1200px;
-  margin-top: 8rem;
+  margin-top: 5rem;
 }
 
 .top {
@@ -198,6 +203,25 @@ body {
     rgba(240, 230, 255, 0.45) 0%,
     rgba(240, 230, 255, 0) 60%
   );
+}
+
+.aviso {
+  width: 70%;
+  height: 3rem;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #fef3c7;
+  margin-top: 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #b47471;
+}
+.alert {
+  max-width: 30px;
 }
 
 .destaque {
@@ -295,6 +319,9 @@ body {
 .btn-enc:hover {
   border-color: var(--color-primary);
   color: var(--color-primary);
+}
+.btn-dest-enco {
+  margin: 10px;
 }
 
 .btn-enc span {
@@ -635,7 +662,7 @@ body {
 .wrapper-cat {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
 }
 
@@ -1104,6 +1131,25 @@ body {
     width: 2.5rem;
     padding: 0;
     border-radius: 10px;
+  }
+
+  .main {
+    margin-top: 1rem;
+  }
+
+  .aviso {
+    width: 90%;
+    height: 4rem;
+  }
+  .icon-aviso {
+    width: 20%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .alert {
+    max-width: 100%;
   }
 
   .destaque h1 {

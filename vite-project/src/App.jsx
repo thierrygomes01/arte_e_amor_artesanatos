@@ -9,19 +9,22 @@ import {
   Truck,
   Menu,
   X,
+  CircleAlert,
+  Handbag,
+  CreditCard,
 } from "lucide-react";
 
-// ⭐ IMPORTAÇÃO DAS IMAGENS
 import {
   logo,
   coracao,
-  instagram4,
+  guirlandaBranca,
+  guirlandaVerde,
+  guirlandaVerdeClaro,
+  guirlandaVerde2,
   vestido,
   casa,
   prato,
-  ursinho,
   bolsa,
-  estrela,
 } from "./assets/images";
 
 function App() {
@@ -68,7 +71,7 @@ function App() {
   };
 
   const getWhatsAppLink = (productName) => {
-    const phoneNumber = "5511983199876";
+    const phoneNumber = "5511954892613";
     const message = encodeURIComponent(
       `Olá, gostaria de saber mais sobre o produto: ${productName}.`
     );
@@ -78,76 +81,71 @@ function App() {
   const handleWhatsAppClick = (
     contextMessage = "Olá, gostaria de fazer um pedido!"
   ) => {
-    const phoneNumber = "5511983199876";
+    const phoneNumber = "5511954892613";
     const message = encodeURIComponent(contextMessage);
     window.open(`https://wa.me/${phoneNumber}?text=${message}`, "_blank");
   };
 
-  // ⭐ AGORA TODAS AS IMAGENS VEM VIA IMPORT
-  const allProducts = [
+  const steps = [
     {
       id: 1,
-      name: "Cropped Boho Chic",
-      price: "R$ 129,90",
-      image: instagram4,
-      tag: "Mais Vendido",
-      category: "Roupas",
+      icon: <Handbag size={35} color=" var(--color-primary-dark)" />,
+      title: "Escolha",
+      description: "Navegue pelo catálogo e escolha sua peça favorita.",
     },
     {
       id: 2,
-      name: "Bolsa de Praia Natural",
-      price: "R$ 189,90",
-      image: instagram4,
-      tag: "Lançamento",
-      category: "Acessórios",
+      icon: <MessageCircle size={35} color=" var(--color-primary-dark)" />,
+      title: "Disponibilidade",
+      description:
+        "Chame no WhatsApp para confirmar se ainda temos no estoque.",
     },
     {
       id: 3,
-      name: "Kit Mesa Posta (4 un)",
-      price: "R$ 149,90",
-      image: instagram4,
-      tag: "Personalizável",
-      category: "Mesa Posta",
+      icon: <CreditCard size={35} color=" var(--color-primary-dark)" />,
+      title: "Pagamento",
+      description: "Realize o pagamento via Pix ou Cartão para reservar.",
     },
     {
       id: 4,
-      name: "Amigurumi Ursinho",
-      price: "Sob Consulta",
-      image: instagram4,
-      tag: "Infantil",
-      category: "Amigurumis",
+      icon: <Truck size={35} color=" var(--color-primary-dark)" />,
+      title: "Entrega SP",
+      description: "Receba com carinho (Apenas Cidade de São Paulo).",
+    },
+  ];
+
+  const allProducts = [
+    {
+      id: 1,
+      name: "Guirlanda de Natal",
+      price: "R$ 80,00",
+      image: guirlandaBranca,
+      tag: "Decoração",
+      category: "Decoração",
+    },
+    {
+      id: 2,
+      name: "Guirlanda de Natal",
+      price: "R$ 80,00",
+      image: guirlandaVerde,
+      tag: "Decoração",
+      category: "Decoração",
+    },
+    {
+      id: 3,
+      name: "Guirlanda de Natal",
+      price: "R$ 80,00",
+      image: guirlandaVerdeClaro,
+      tag: "Decoração",
+      category: "Decoração",
     },
     {
       id: 5,
-      name: "Tapete Redondo Sala",
-      price: "R$ 299,90",
-      image: instagram4,
+      name: "Guirlanda de Natal",
+      price: "R$ 80,00",
+      image: guirlandaVerde2,
       tag: "Decoração",
       category: "Decoração",
-    },
-    {
-      id: 6,
-      name: "Cesto Organizador",
-      price: "R$ 89,90",
-      image: instagram4,
-      tag: "Decoração",
-      category: "Decoração",
-    },
-    {
-      id: 7,
-      name: "Saída de Praia Longa",
-      price: "R$ 219,90",
-      image: instagram4,
-      tag: "Verão",
-      category: "Roupas",
-    },
-    {
-      id: 8,
-      name: "Polvo Amigurumi",
-      price: "R$ 120,00",
-      image: instagram4,
-      tag: "Infantil",
-      category: "Amigurumis",
     },
   ];
 
@@ -157,13 +155,7 @@ function App() {
     { name: "Roupas", icon: vestido, desc: "Tops, saias e vestidos leves" },
     { name: "Decoração", icon: casa, desc: "Cestos, tapetes e mantas" },
     { name: "Mesa Posta", icon: prato, desc: "Sousplat e caminhos de mesa" },
-    { name: "Amigurumis", icon: ursinho, desc: "Bichinhos feitos com amor" },
     { name: "Acessórios", icon: bolsa, desc: "Bolsas e chapéus exclusivos" },
-    {
-      name: "Encomendas",
-      icon: estrela,
-      desc: "Sua ideia transformada em arte",
-    },
   ];
 
   const productsToDisplay =
@@ -190,7 +182,13 @@ function App() {
         </nav>
 
         <div className="contato-header">
-          <Instagram className="icon-instagram" size={20} />
+          <a
+            className="btn-instagram"
+            href="https://www.instagram.com/arte.eamorartesanatos/"
+            target="blank"
+          >
+            <Instagram className="icon-instagram" size={20} />
+          </a>
 
           <div
             className="contato-button"
@@ -236,6 +234,13 @@ function App() {
         </button>
       </nav>
 
+      <div className="aviso">
+        <div className="icon-aviso">
+          <CircleAlert className="alert" />
+        </div>
+        Atenção: Entregas realizadas exclusivamente na Cidade de São Paulo.
+      </div>
+
       <div id="catalogo" className="main">
         <div className="top">
           <div className="destaque">
@@ -246,7 +251,7 @@ function App() {
                 <span className="ponto">
                   <Dot />
                 </span>
-                FEITO COM AMOR
+                PRONTA ENTREGA
               </p>
             </div>
 
@@ -255,8 +260,8 @@ function App() {
             </h1>
 
             <p>
-              Peças exclusivas, acabamento impecável e encomendas sob medida
-              para vestir você e sua casa.
+              Peças exclusivas e acabamento impecável. Trabalhamos apenas com
+              peças a pronta entrega para você não precisar esperar.
             </p>
 
             <div className="buttons-destaque">
@@ -275,7 +280,8 @@ function App() {
                   )
                 }
               >
-                <MessageCircle size={17} /> Encomendar
+                <MessageCircle className="btn-dest-enco" size={17} /> Fazer
+                Pedido
               </button>
             </div>
           </div>
@@ -283,7 +289,7 @@ function App() {
           <div className="photo-destaque">
             <div
               className="card-img"
-              style={{ backgroundImage: `url(${instagram4})` }}
+              style={{ backgroundImage: `url(${guirlandaBranca})` }}
             ></div>
           </div>
         </div>
@@ -441,7 +447,6 @@ function App() {
           </div>
         )}
 
-        {/* Tutorial */}
         <div id="encomendas" className="tutorial">
           <div className="info">
             <h3 className="title-tut">Como encomendar sua peça</h3>
@@ -450,32 +455,15 @@ function App() {
             </h3>
 
             <div className="steps">
-              {[1, 2, 3, 4].map((step) => (
-                <div key={step} className="escolha">
+              {steps.map((step) => (
+                <div key={step.id} className="escolha">
                   <div className="card-escolha">
-                    <img src={bolsa} alt="Ícone" />
-                    <div>{step}</div>
+                    {step.icon}
+                    <div>{step.id}</div>
                   </div>
 
-                  <h3 className="title-escolha">
-                    {step === 1
-                      ? "1. Escolha"
-                      : step === 2
-                      ? "2. Personalize"
-                      : step === 3
-                      ? "3. Produção"
-                      : "4. Entrega"}
-                  </h3>
-
-                  <h3 className="desc-escolha">
-                    {step === 1
-                      ? "Selecione o modelo ou traga sua inspiração."
-                      : step === 2
-                      ? "Defina cores, tamanhos e detalhes."
-                      : step === 3
-                      ? "Confeccionamos à mão com fios premium."
-                      : "Receba em casa com cuidado especial."}
-                  </h3>
+                  <h3 className="title-escolha">{`${step.id}. ${step.title}`}</h3>
+                  <h3 className="desc-escolha">{step.description}</h3>
                 </div>
               ))}
             </div>
@@ -483,20 +471,20 @@ function App() {
             <button
               className="btn-escolha"
               onClick={() =>
-                handleWhatsAppClick("Olá, gostaria de solicitar um orçamento!")
+                handleWhatsAppClick("Olá, gostaria de fazer um pedido!")
               }
             >
-              <MessageCircle size={17} /> Solicitar Orçamento
+              <MessageCircle size={17} /> Fazer Pedido
             </button>
           </div>
         </div>
 
-        {/* Contato */}
         <div id="contato" className="contato">
           <div className="contato-content">
             <h3 className="title-contato">Transforme fios em sonhos</h3>
             <h3 className="desc-cont">
-              Peças feitas à mão com cuidado e acabamento profissional.
+              Peças únicas esperando por você. Não deixe para depois, nosso
+              estoque é limitado!
             </h3>
 
             <button
@@ -511,7 +499,6 @@ function App() {
         </div>
       </div>
 
-      {/* Footer */}
       <footer className="footer">
         <div className="footer-wrapper">
           <div className="topicos">
@@ -561,10 +548,10 @@ function App() {
             </div>
 
             <div className="sub-t">
-              <a href="#">Moda Crochet</a>
+              <a href="#">Roupas</a>
               <a href="#">Decoração</a>
-              <a href="#">Infantil</a>
-              <a href="#">Promoções</a>
+              <a href="#">Mesa Posta</a>
+              <a href="#">Acessórios</a>
             </div>
           </div>
 
@@ -578,10 +565,10 @@ function App() {
                 <div>
                   <MessageCircle className="icon-sub-contato" />
                   <a
-                    href="https://wa.me/5511983199876?text=Olá!"
+                    href="https://wa.me/5511954892613?text=Olá!"
                     target="_blank"
                   >
-                    <h3>(11) 99999-9999</h3>
+                    <h3>(11) 95489-2613</h3>
                   </a>
                 </div>
                 <p>Seg a Sex, 9h às 18h</p>
@@ -590,7 +577,7 @@ function App() {
               <div className="sub-envio">
                 <div>
                   <Truck className="icon-sub-contato" />
-                  <h3>Enviamos para todo o Brasil</h3>
+                  <h3>Enviamos para toda a cidade de SP</h3>
                 </div>
                 <p>São Paulo, SP</p>
               </div>
