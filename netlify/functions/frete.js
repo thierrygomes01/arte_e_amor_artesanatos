@@ -1,3 +1,5 @@
+import fetch from "node-fetch";
+
 export async function handler(event) {
   try {
     const { cepDestino } = JSON.parse(event.body);
@@ -13,7 +15,7 @@ export async function handler(event) {
         "User-Agent": "arte-e-amor-artesanatos",
       },
       body: JSON.stringify({
-        from: { postal_code: "01001000" },
+        from: { postal_code: "07273100" },
         to: { postal_code: cepDestino },
         products: [
           {
