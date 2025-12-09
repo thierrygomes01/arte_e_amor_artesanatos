@@ -4,43 +4,41 @@ export async function handler(event) {
 
     const token = process.env.MELHOR_ENVIO_TOKEN;
 
-    const response = await fetch(
-      "https://api.melhorenvio.com.br/v2/me/shipment/calculate",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "User-Agent": "Aplicação (seuemail@email.com)",
-        },
-        body: JSON.stringify({
-          from: { postal_code: "01001000" }, // CEP de origem (troque pelo da sua prima)
-          to: { postal_code: cepDestino },
-          products: [
-            {
-              width: 11,
-              height: 2,
-              length: 16,
-              weight: 0.3,
-              insurance_value: 50,
-              quantity: 1,
-            },
-          ],
-        }),
-      }
-    );
+    const response = await fetch("https://api.melhorenvio.com.br/v2/me/shipment/calculate", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "User-Agent": "arte-e-amor-artesanatos",
+      },
+      body: JSON.stringify({
+        from: { postal_code: "01001000" },
+        to: { postal_code: cepDestino },
+        products: [
+          {
+            width: 10,
+            height: 5,
+            length: 15,
+            weight: 0.3,
+            insurance_value: 50,
+            quantity: 1,
+          }
+        ]
+      })
+    });
 
-    const data = await response.json();
+    const text = await response.text();
 
     return {
-      statusCode: 200,
-      body: JSON.stringify(data),
+      statusCode: response.status,
+      body: text
     };
+
   } catch (err) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ erro: "Erro ao calcular frete" }),
+      body: JSON.stringify({ erro: err.message }),
     };
   }
 }
