@@ -10,7 +10,7 @@ export async function handler(event) {
       };
     }
 
-    const response = await fetch("https://api.melhorenvio.com.br/v2/me/shipment/calculate", {
+    const response = await fetch("https://sandbox.melhorenvio.com.br/v2/me/shipment/calculate", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
